@@ -21,34 +21,35 @@ public class Timer : MonoBehaviour
 
     }
 
+    //for when user answers early
     public void CancelTimer(){
         timerValue = 0;
     }
 
     void UpdateTimer()
     {
-
         timerValue -= Time.deltaTime;
+        
 
-        if (isAnsweringQuestion)
+        if (isAnsweringQuestion) // this is what to do while user is answering question
         {
-            if (timerValue > 0)
+            if (timerValue > 0) // if user still has time
             {
-                fillFraction = timerValue / timeToCompleteQuestion;
+                fillFraction = timerValue / timeToCompleteQuestion; // this updates how much the image is filled according to time
             }
-            else
+            else //if user's time runs out
             {
                 timerValue = timeToShowCorrectAnswer;
                 isAnsweringQuestion = false;
             }
         }
-        else
+        else //now the user is seeing the correct answer on the screen
         {
-            if (timerValue > 0)
+            if (timerValue > 0) //user is looking at the correct answer
             {
                 fillFraction = timerValue / timeToShowCorrectAnswer;
             }
-            else
+            else //now it's time to move on to the next question
             {
                 timerValue = timeToCompleteQuestion;
                 loadNextQuestion = true;
